@@ -29,4 +29,9 @@ public class PartieAdverseMapper {
 
 
         return dto;
-    }}
+    }
+
+    public static PartieAdverse dtoToEntity(PartieAdversedto partieAdverseDto) {
+        return null;
+    }
+}

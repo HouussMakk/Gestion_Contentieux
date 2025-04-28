@@ -42,20 +42,25 @@ public class PartieAdverseController {
 
     @PostMapping
     public ResponseEntity<PartieAdversedto> createPartieAdverse(@RequestBody PartieAdversedto partieAdverseDto) {
-        // Conversion simplifiée de DTO vers entité (sans relations)
-        PartieAdverse partieAdverse = new PartieAdverse();
-        partieAdverse.setIdPartieAdverse(partieAdverse.getIdPartieAdverse());
-        partieAdverse.setNom(partieAdverseDto.getNom());
-        partieAdverse.setAdresee(partieAdverseDto.getAdresee());
-        partieAdverse.setContact(partieAdverseDto.getContact());
+        try {
+            // Convertir DTO en entité en utilisant le mapper
+            PartieAdverse partieAdverse = PartieAdverseMapper.dtoToEntity(partieAdverseDto);
 
-        // Créer la partie adverse
-        PartieAdverse createdPartieAdverse = partieAdverseService.createPartieAdverse(partieAdverse);
+            // S'assurer que l'ID est NULL pour une nouvelle entité
+            partieAdverse.setIdPartieAdverse(null);
 
-        // Conversion de l'entité vers DTO pour la réponse
-        PartieAdversedto createdPartieAdverseDto = PartieAdverseMapper.entityToDto(createdPartieAdverse);
+            // Créer la partie adverse
+            PartieAdverse createdPartieAdverse = partieAdverseService.createPartieAdverse(partieAdverse);
 
-        return new ResponseEntity<>(createdPartieAdverseDto, HttpStatus.CREATED);
+            // Convertir l'entité créée en DTO pour la réponse
+            PartieAdversedto createdDto = PartieAdverseMapper.entityToDto(createdPartieAdverse);
+
+            return new ResponseEntity<>(createdDto, HttpStatus.CREATED);
+        } catch (Exception e) {
+            System.err.println("Erreur lors de la création de la partie adverse: " + e.getMessage());
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/{id}")
