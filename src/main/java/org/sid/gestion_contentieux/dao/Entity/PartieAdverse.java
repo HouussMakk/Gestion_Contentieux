@@ -15,15 +15,15 @@ import java.util.List;
 
 public class PartieAdverse {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public String idPartieadverse ;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long idPartieadverse ;
     public  String nom ;
     public  String adresee ;
     public  String contact ;
     @OneToMany(mappedBy = "partieAdverse")
     private List<Dossier_juridique> dossiers = new ArrayList<>();
     // getter
-    public int getIdPartieAdverse() {
+    public Long getIdPartieAdverse() {
         return idPartieadverse;
     }
 

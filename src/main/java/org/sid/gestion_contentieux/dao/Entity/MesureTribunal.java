@@ -26,6 +26,7 @@ public class MesureTribunal {
     @ManyToOne
     @JoinColumn(name = "reference_Dossier")
     private Dossier_juridique dossierJuridique;
+
     public Dossier_juridique getDossierjuridique() {
         return dossierJuridique;
     }

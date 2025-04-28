@@ -3,25 +3,44 @@ package org.sid.gestion_contentieux.mappers;
 import org.sid.gestion_contentieux.dao.Entity.Avocat;
 import org.sid.gestion_contentieux.dto.AvocatDTO;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * Static mapper utility for converting between Avocat entities and DTOs
+ */
 public class AvocatMapper {
 
-    public static AvocatDTO toDto(Avocat avocat) {
-        if (avocat == null) return null;
+    /**
+     * Converts an Avocat entity to an AvocatDTO
+     *
+     * @param avocat the entity to convert
+     * @return the converted DTO
+     */
+    public static AvocatDTO entityToDto(Avocat avocat) {
+        if (avocat == null) {
+            return null;
+        }
 
         AvocatDTO dto = new AvocatDTO();
+
         dto.setIdAvocat(avocat.getIdAvocat());
         dto.setNomCabinet(avocat.getNom_cabinet());
         dto.setContact(avocat.getContact());
+
         return dto;
     }
 
-    public static Avocat toEntity(AvocatDTO dto) {
-        if (dto == null) return null;
+    /**
+     * Converts a list of entities to a list of DTOs
+     */
+    public static List<AvocatDTO> entitiesToDtos(List<Avocat> entities) {
+        if (entities == null) {
+            return null;
+        }
 
-        Avocat avocat = new Avocat();
-        avocat.setIdAvocat(Long.valueOf(dto.getIdAvocat()));
-        avocat.setNom_cabinet(dto.getNomCabinet());
-        avocat.setContact(dto.getContact());
-        return avocat;
+        return entities.stream()
+                .map(AvocatMapper::entityToDto)
+                .collect(Collectors.toList());
     }
 }

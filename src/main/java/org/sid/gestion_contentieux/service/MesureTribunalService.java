@@ -1,23 +1,26 @@
 package org.sid.gestion_contentieux.service;
 
+import org.sid.gestion_contentieux.dao.Entity.Dossier_juridique;
 import org.sid.gestion_contentieux.dao.Entity.MesureTribunal;
+import org.sid.gestion_contentieux.dao.Repository.Dossier_juridiqueRepo;
 import org.sid.gestion_contentieux.dao.Repository.MesureTribunalRepo;
+import org.sid.gestion_contentieux.dto.MesureTribunaldto;
+import org.sid.gestion_contentieux.mappers.MesureTribunalMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MesureTribunalService implements MesureTribunalManager{
-
-    private  MesureTribunalRepo mesureRepository;
-
     @Autowired
-    public MesureTribunalService(MesureTribunalRepo mesureRepository) {
-        this.mesureRepository = mesureRepository;
-    }
+    private  MesureTribunalRepo mesureRepository;
+    @Autowired
+    private  Dossier_juridiqueRepo dossierRepository;;
+
 
     @Override
     public List<MesureTribunal> getAllMesures() {
@@ -31,7 +34,13 @@ public class MesureTribunalService implements MesureTribunalManager{
     }
 
     @Override
-    public MesureTribunal createMesure(MesureTribunal mesure) {
+    public MesureTribunal createMesure(MesureTribunaldto mesureDto) {
+        Optional<Dossier_juridique> dossierJuridique =  dossierRepository.findByReference_Dossier(mesureDto.getReferenceDossier());
+        if(dossierJuridique == null) {
+            throw new NullPointerException("Dossier juridique");
+        }
+        MesureTribunal mesure = MesureTribunalMapper.dtoToEntity(mesureDto);
+
         return mesureRepository.save(mesure);
     }
 
@@ -74,12 +83,6 @@ public class MesureTribunalService implements MesureTribunalManager{
     public List<MesureTribunal> findByDateMesure(Date date) {
         return mesureRepository.findByDateMesure(date);
     }
-
-
-
-
-
-
 
 
     }

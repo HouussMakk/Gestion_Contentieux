@@ -1,6 +1,7 @@
 package org.sid.gestion_contentieux.service;
 
 import org.sid.gestion_contentieux.dao.Entity.MesureTribunal;
+import org.sid.gestion_contentieux.dto.MesureTribunaldto;
 
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,6 @@ public interface MesureTribunalManager {
 
      /**
       * Récupère une mesure tribunal par son ID
-      * @param idMesure l'ID de la mesure
       * @return la mesure tribunal correspondante
       */
      MesureTribunal getMesureById(int id_Mesure);
@@ -26,11 +26,11 @@ public interface MesureTribunalManager {
       * @param mesure la mesure à créer
       * @return la mesure créée
       */
-     MesureTribunal createMesure(MesureTribunal mesure);
+     MesureTribunal createMesure(MesureTribunaldto mesure);
 
      /**
       * Met à jour une mesure tribunal existante
-      * @param idMesure l'ID de la mesure à mettre à jour
+      * @param id_Mesure l'ID de la mesure à mettre à jour
       * @param mesureDetails les nouvelles données de la mesure
       * @return la mesure mise à jour
       */
@@ -38,7 +38,7 @@ public interface MesureTribunalManager {
 
      /**
       * Supprime une mesure tribunal
-      * @param idMesure l'ID de la mesure à supprimer
+      * @param id_Mesure l'ID de la mesure à supprimer
       * @return true si la suppression a réussi
       */
      boolean deleteMesure(int id_Mesure);
@@ -52,7 +52,7 @@ public interface MesureTribunalManager {
 
      /**
       * Recherche des mesures par référence de dossier juridique
-      * @param referenceDossier la référence du dossier
+      * @param reference_Dossier la référence du dossier
       * @return la liste des mesures correspondantes
       */
      List<MesureTribunal> findByDossierJuridiqueReference(String reference_Dossier);

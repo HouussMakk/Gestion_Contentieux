@@ -2,6 +2,7 @@ package org.sid.gestion_contentieux.web;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.sid.gestion_contentieux.dao.Entity.MesureTribunal;
+import org.sid.gestion_contentieux.dto.MesureTribunaldto;
 import org.sid.gestion_contentieux.service.MesureTribunalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -47,8 +48,9 @@ public class MesureTribunalController {
      * Crée une nouvelle mesure tribunal
      */
     @PostMapping
-    public ResponseEntity<MesureTribunal> createMesure(@RequestBody MesureTribunal mesure) {
-        MesureTribunal createdMesure = mesureService.createMesure(mesure);
+    public ResponseEntity<MesureTribunal> createMesure(@RequestBody MesureTribunaldto mesureDto) {
+        // Créer la mesure
+        MesureTribunal createdMesure = mesureService.createMesure(mesureDto);
         return new ResponseEntity<>(createdMesure, HttpStatus.CREATED);
     }
 

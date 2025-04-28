@@ -1,6 +1,5 @@
 package org.sid.gestion_contentieux.service;
 
-import jakarta.transaction.Transactional;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.sid.gestion_contentieux.dao.Entity.Dossier_juridique;
 import org.sid.gestion_contentieux.dao.Repository.Dossier_juridiqueRepo;
@@ -58,7 +57,6 @@ public class Dossier_juridiqueService implements Dossier_juridiquemanager {
     private MesureTribunalRepo mesureTribunalRepo;
 
     @Override
-    @Transactional
     public boolean deleteDossier(String reference_Dossier) {
         Dossier_juridique dossier = getDossierByReference(reference_Dossier);
 

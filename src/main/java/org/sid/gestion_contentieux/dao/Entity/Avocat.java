@@ -24,5 +24,4 @@ public class Avocat {
     public int getIdAvocat() { return idavocat; }
     public void setIdAvocat(Long idAvocat) { this.idavocat = idavocat; }
 
-
 }

@@ -1,27 +1,22 @@
 package org.sid.gestion_contentieux.mappers;
 
 import org.sid.gestion_contentieux.dao.Entity.MesureTribunal;
-import org.sid.gestion_contentieux.dao.Repository.DocumentAssocieRepo;
-import org.sid.gestion_contentieux.dao.Repository.Dossier_juridiqueRepo;
 import org.sid.gestion_contentieux.dto.MesureTribunaldto;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import java.util.List;
+import java.util.stream.Collectors;
 
-@Component
+/**
+ * Static mapper utility for converting between MesureTribunal entities and DTOs
+ */
 public class MesureTribunalMapper {
-    @Autowired
-    private DocumentAssocieRepo documentAssocieRepository;
-
-    @Autowired
-    private Dossier_juridiqueRepo dossierJuridiqueRepository;
 
     /**
      * Converts a MesureTribunal entity to a MesureTribunaldto
      *
-     * @param mesure the entity to convert
+     * param  the entity to convert
      * @return the converted DTO
      */
-    public MesureTribunaldto entityToDto(MesureTribunal mesure) {
+    /*public static MesureTribunaldto entityToDto(MesureTribunaldto mesure) {
         if (mesure == null) {
             return null;
         }
@@ -29,89 +24,65 @@ public class MesureTribunalMapper {
         MesureTribunaldto dto = new MesureTribunaldto();
 
         dto.setIdMesure(mesure.getId_Mesure());
-        dto.setTypeMesure(mesure.gettypeMesure());
+        dto.setTypeMesure(mesure.getTypeMesure());
         dto.setDateMesure(mesure.getDateMesure());
 
         // Set document ID if document exists
         if (mesure.getDocumentAssocie() != null) {
-            dto.setDocumentAssocieId(mesure.getDocumentAssocie().getId());
+            dto.setDocumentAssocieId(mesure.getDocumentAssocie().getIdDocumentAssocie());
         }
 
         // Set dossier reference if dossier exists
         if (mesure.getDossierJuridique() != null) {
-            dto.setReferenceDossier(mesure.getDossierJuridique().getReferenceDossier());
+            dto.setReferenceDossier(mesure.getDossierJuridique().getReference_Dossier());
         }
 
         return dto;
     }
 
     /**
-     * Converts a MesureTribunaldto to a MesureTribunal entity
-     *
-     * @param dto the DTO to convert
-     * @param existingEntity optional existing entity to update (can be null for new entity)
-     * @return the converted entity
-     */
-    public MesureTribunal dtoToEntity(MesureTribunaldto dto, MesureTribunal existingEntity) {
-        if (dto == null) {
-            return null;
-        }
-
-        MesureTribunal entity = (existingEntity != null) ? existingEntity : new MesureTribunal();
-
-        // Don't set ID for new entities (it's typically auto-generated)
-        if (existingEntity != null || dto.getIdMesure() != 0) {
-            entity.setIdMesure(dto.getIdMesure());
-        }
-
-        entity.setTypeMesure(dto.getTypeMesure());
-        entity.setDateMesure(dto.getDateMesure());
-
-        // Set related document if ID is provided
-        if (dto.getDocumentAssocieId() != 0) {
-            Optional<DocumentAssocie> document = documentAssocieRepository.findById(dto.getDocumentAssocieId());
-            document.ifPresent(entity::setDocumentAssocie);
-        }
-
-        // Set related dossier if reference is provided
-        if (dto.getReferenceDossier() != null && !dto.getReferenceDossier().isEmpty()) {
-            Optional<Dossier_juridique> dossier = dossierJuridiqueRepository.findByReferenceDossier(dto.getReferenceDossier());
-            dossier.ifPresent(entity::setDossierJuridique);
-        }
-
-        return entity;
-    }
-
-    /**
-     * Convenience method for creating a new entity from a DTO
-     */
-    public MesureTribunal dtoToEntity(MesureTribunaldto dto) {
-        return dtoToEntity(dto, null);
-    }
-
-    /**
      * Converts a list of entities to a list of DTOs
      */
-    public List<MesureTribunaldto> entitiesToDtos(List<MesureTribunal> entities) {
+    public static List<MesureTribunaldto> entitiesToDtos(List<MesureTribunal> entities) {
         if (entities == null) {
             return null;
         }
 
-        return entities.stream()
-                .map(this::entityToDto)
+        List<MesureTribunaldto> collect = entities.stream()
+                .map((MesureTribunal mesure) -> entityToDto(mesure))
                 .collect(Collectors.toList());
+        return collect;
+    }
+
+                static MesureTribunaldto entityToDto(MesureTribunal mesure) {
+        return null ;
     }
 
     /**
-     * Converts a list of DTOs to a list of entities
+     * Converts a MesureTribunaldto to a MesureTribunal entity
+     *
+     * @param dto the DTO to convert
+     * @return the converted entity
      */
-    public List<MesureTribunal> dtosToEntities(List<MesureTribunaldto> dtos) {
-        if (dtos == null) {
+    public static MesureTribunal dtoToEntity(MesureTribunaldto dto) {
+        if (dto == null) {
             return null;
         }
 
-        return dtos.stream()
-                .map(this::dtoToEntity)
-                .collect(Collectors.toList());
+        MesureTribunal entity = new MesureTribunal();
+
+        // Ne pas définir l'ID pour les nouvelles entités (auto-généré)
+        if (dto.getIdMesure() != 0) {
+            entity.setId_Mesure(dto.getIdMesure());
+        }
+
+        entity.settypeMesure(dto.getTypeMesure());
+        entity.setDateMesure(dto.getDateMesure());
+        entity.setDossierJuridique(dto.getDossierJuridique());
+        entity.setDocumentAssocie(dto.getDocumentAssocie());
+        // Remarque: Les relations (document, dossier) doivent être gérées séparément
+        // car elles nécessitent des accès aux repositories
+
+        return entity;
     }
 }

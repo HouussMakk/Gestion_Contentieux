@@ -15,12 +15,15 @@ import java.util.List;
 
 public class Port {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
     public String codePort ;
     public String NomPort ;
     @OneToMany(mappedBy = "port")
     private List<Dossier_juridique> dossiers = new ArrayList<>();
 
 
+    public String getCodePort() {
+
+
+        return this.codePort;
+    }
 }

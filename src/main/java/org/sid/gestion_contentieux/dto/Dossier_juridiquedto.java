@@ -16,8 +16,8 @@ public class Dossier_juridiquedto {
     private String objetLitige;
     private String instanceJudiciaire;
 
-    private int portId;
-    private int partieAdverseId;
+    private String portId;
+    private  Long partieAdverseId;
     private int stadeLitigeId;
     private int avocatId;
 
@@ -43,11 +43,11 @@ public class Dossier_juridiquedto {
         return instanceJudiciaire;
     }
 
-    public int getPortId() {
+    public String getPortId() {
         return portId;
     }
 
-    public int getPartieAdverseId() {
+    public Long getPartieAdverseId() {
         return partieAdverseId;
     }
 
@@ -84,11 +84,11 @@ public class Dossier_juridiquedto {
         this.instanceJudiciaire = instanceJudiciaire;
     }
 
-    public void setPortId(int portId) {
-        this.portId = portId;
+    public void setCodePort(String codePort) {
+        this.portId = codePort;
     }
 
-    public void setPartieAdverseId(int partieAdverseId) {
+    public void setPartieAdverseId(Long partieAdverseId) {
         this.partieAdverseId = partieAdverseId;
     }
 
