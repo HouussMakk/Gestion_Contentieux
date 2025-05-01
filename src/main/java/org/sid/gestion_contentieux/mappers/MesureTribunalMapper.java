@@ -54,7 +54,7 @@ public class MesureTribunalMapper {
         return collect;
     }
 
-                static MesureTribunaldto entityToDto(MesureTribunal mesure) {
+                public static MesureTribunaldto entityToDto(MesureTribunal mesure) {
         return null ;
     }
 

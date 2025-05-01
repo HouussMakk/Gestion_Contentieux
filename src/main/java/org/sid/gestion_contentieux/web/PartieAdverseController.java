@@ -44,10 +44,7 @@ public class PartieAdverseController {
     public ResponseEntity<PartieAdversedto> createPartieAdverse(@RequestBody PartieAdversedto partieAdverseDto) {
         try {
             // Convertir DTO en entité en utilisant le mapper
-            PartieAdverse partieAdverse = PartieAdverseMapper.dtoToEntity(partieAdverseDto);
-
-            // S'assurer que l'ID est NULL pour une nouvelle entité
-            partieAdverse.setIdPartieAdverse(null);
+            PartieAdverse partieAdverse = new PartieAdverse(partieAdverseDto.getNom(),partieAdverseDto.getAdresee(),partieAdverseDto.getContact());
 
             // Créer la partie adverse
             PartieAdverse createdPartieAdverse = partieAdverseService.createPartieAdverse(partieAdverse);

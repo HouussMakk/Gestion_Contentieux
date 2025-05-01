@@ -32,7 +32,7 @@ public class Dossier_juridiqueMapper {
 
         // Assuming these are IDs from related entities
         if (dossier.getPort() != null) {
-            dto.setPortId(String.valueOf(Integer.parseInt(dossier.getPort().getCodePort())));
+            dto.setCodePort(String.valueOf(Integer.parseInt(dossier.getPort().getCodePort())));
         }
 
         if (dossier.getPartieAdverse() != null) {
@@ -52,7 +52,7 @@ public class Dossier_juridiqueMapper {
             List<MesureTribunaldto> mesureDtos = dossier.getMesures().stream()
                     .map(MesureTribunalMapper::entityToDto)
                     .collect(Collectors.toList());
-            dto.setMesures(mesureDtos);
+//            dto.setMesures(mesureDtos);
         }
 
         return dto;

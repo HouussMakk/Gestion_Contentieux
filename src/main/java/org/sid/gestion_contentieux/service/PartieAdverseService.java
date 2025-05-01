@@ -25,6 +25,7 @@ public class PartieAdverseService implements PartieAdverseManager {
 
     @Override
     public PartieAdverse getPartieAdverseById(String idPartieAdverse) {
+        List<PartieAdverse> partieAdverses = partieAdverseRepository.findAll();
         return partieAdverseRepository.findById(Long.valueOf(idPartieAdverse))
                 .orElseThrow(() -> new ResourceNotFoundException("Partie adverse non trouvée avec l'ID: " + idPartieAdverse));
     }

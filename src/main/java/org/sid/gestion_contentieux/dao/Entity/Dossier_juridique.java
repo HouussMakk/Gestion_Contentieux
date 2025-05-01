@@ -1,5 +1,6 @@
     package org.sid.gestion_contentieux.dao.Entity;
 
+    import com.fasterxml.jackson.annotation.JsonIgnore;
     import jakarta.persistence.*;
     import lombok.*;
 
@@ -38,6 +39,7 @@
 
 
         @OneToMany(mappedBy = "dossierJuridique")
+        @JsonIgnore
         private List<MesureTribunal> mesures ;
 
 

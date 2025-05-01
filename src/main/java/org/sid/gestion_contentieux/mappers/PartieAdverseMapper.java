@@ -32,6 +32,10 @@ public class PartieAdverseMapper {
     }
 
     public static PartieAdverse dtoToEntity(PartieAdversedto partieAdverseDto) {
-        return null;
+        PartieAdverse partieAdverse = new PartieAdverse();
+        partieAdverse.setNom(partieAdverseDto.getNom());
+        partieAdverse.setAdresee(partieAdverseDto.getAdresee());
+        partieAdverse.setContact(partieAdverseDto.getContact());
+        return partieAdverse;
     }
 }

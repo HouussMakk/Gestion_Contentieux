@@ -1,5 +1,6 @@
 package org.sid.gestion_contentieux.dao.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class DocumentAssocie {
     private  String documentAssocie;
 
     @OneToMany(mappedBy = "documentAssocie")
+    @JsonIgnore
     private List<MesureTribunal> mesures = new ArrayList<>();
 
     // Constructor(s)

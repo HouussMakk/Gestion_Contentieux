@@ -1,8 +1,9 @@
 package org.sid.gestion_contentieux.dto;
 
-import lombok.*;
-
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
@@ -16,12 +17,13 @@ public class Dossier_juridiquedto {
     private String objetLitige;
     private String instanceJudiciaire;
 
-    private String portId;
-    private  Long partieAdverseId;
+    private String codePort;
+    private Long partieAdverseId;
     private int stadeLitigeId;
     private int avocatId;
 
-    private List<MesureTribunaldto> mesures;
+//    private List<MesureTribunaldto> mesures;
+
     // Getters
     public String getReferenceDossier() {
         return referenceDossier;
@@ -43,8 +45,8 @@ public class Dossier_juridiquedto {
         return instanceJudiciaire;
     }
 
-    public String getPortId() {
-        return portId;
+    public String getCodePort() {
+        return codePort;
     }
 
     public Long getPartieAdverseId() {
@@ -59,9 +61,9 @@ public class Dossier_juridiquedto {
         return avocatId;
     }
 
-    public List<MesureTribunaldto> getMesures() {
-        return mesures;
-    }
+//    public List<MesureTribunaldto> getMesures() {
+//        return mesures;
+//    }
 
     // Setters
     public void setReferenceDossier(String referenceDossier) {
@@ -85,7 +87,7 @@ public class Dossier_juridiquedto {
     }
 
     public void setCodePort(String codePort) {
-        this.portId = codePort;
+        this.codePort = codePort;
     }
 
     public void setPartieAdverseId(Long partieAdverseId) {
@@ -100,12 +102,9 @@ public class Dossier_juridiquedto {
         this.avocatId = avocatId;
     }
 
-    public void setMesures(List<MesureTribunaldto> mesures) {
-        this.mesures = mesures;
-    }
-
-
-
+//    public void setMesures(List<MesureTribunaldto> mesures) {
+//        this.mesures = mesures;
+//    }
 
 
 }
