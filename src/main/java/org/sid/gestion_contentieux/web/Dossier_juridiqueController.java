@@ -68,6 +68,7 @@ public class Dossier_juridiqueController {
             // Récupérer les entités référencées par IDs
             if (dossierDto.getCodePort() != null && !dossierDto.getCodePort().isEmpty()) {
                 Port port = portService.getPortByCode(dossierDto.getCodePort());
+                port.setDossiers(new ArrayList<>());
                 dossier.setPort(port);
             }
 

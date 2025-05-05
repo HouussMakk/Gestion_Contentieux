@@ -7,13 +7,13 @@
     import java.util.List;
 
     @Entity
-    @Data
+
     @NoArgsConstructor
     @AllArgsConstructor
 
 
     public class Dossier_juridique {
-        @Id @GeneratedValue(strategy = GenerationType.AUTO)
+        @Id
         public String reference_Dossier ;
         public String qualiteagence ;
         public String natureLitige ;

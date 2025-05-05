@@ -32,7 +32,7 @@ public class Dossier_juridiqueMapper {
 
         // Assuming these are IDs from related entities
         if (dossier.getPort() != null) {
-            dto.setCodePort(String.valueOf(Integer.parseInt(dossier.getPort().getCodePort())));
+            dto.setCodePort(dossier.getPort().getCodePort());
         }
 
         if (dossier.getPartieAdverse() != null) {
