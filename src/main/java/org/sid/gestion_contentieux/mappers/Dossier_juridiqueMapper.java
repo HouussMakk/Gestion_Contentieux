@@ -24,7 +24,7 @@ public class Dossier_juridiqueMapper {
 
         Dossier_juridiquedto dto = new Dossier_juridiquedto();
 
-        dto.setReferenceDossier(dossier.getReference_Dossier());
+        dto.setReferenceDossier(dossier.getReferenceDossier());
         dto.setQualiteAgence(dossier.getQualiteagence());
         dto.setNatureLitige(dossier.getNatureLitige());
         dto.setObjetLitige(dossier.getObjetLitige());

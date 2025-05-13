@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -49,8 +50,8 @@ public class Dossier_juridiqueController {
 
     @GetMapping("/{reference}")
     public ResponseEntity<Dossier_juridiquedto> getDossierByReference(@PathVariable String reference) {
-        Dossier_juridique dossier = dossierService.getDossierByReference(reference);
-        Dossier_juridiquedto dossierDto = Dossier_juridiqueMapper.entityToDto(dossier);
+        Optional<Dossier_juridique> dossier = dossierService.getDossierByReference(reference);
+        Dossier_juridiquedto dossierDto = Dossier_juridiqueMapper.entityToDto(dossier.get());
         return new ResponseEntity<>(dossierDto, HttpStatus.OK);
     }
 
@@ -59,7 +60,7 @@ public class Dossier_juridiqueController {
         try {
             // Convertir DTO en entité
             Dossier_juridique dossier = new Dossier_juridique();
-            dossier.setReference_Dossier(dossierDto.getReferenceDossier());
+            dossier.setReferenceDossier(dossierDto.getReferenceDossier());
             dossier.setQualiteagence(dossierDto.getQualiteAgence());
             dossier.setNatureLitige(dossierDto.getNatureLitige());
             dossier.setObjetLitige(dossierDto.getObjetLitige());
@@ -107,7 +108,7 @@ public class Dossier_juridiqueController {
             @RequestBody Dossier_juridiquedto dossierDto) {
         try {
             // Récupérer le dossier existant
-            Dossier_juridique existingDossier = dossierService.getDossierByReference(reference);
+            Dossier_juridique existingDossier = dossierService.getDossierByReference(reference).get();
 
             // Mettre à jour les propriétés de base
             existingDossier.setQualiteagence(dossierDto.getQualiteAgence());

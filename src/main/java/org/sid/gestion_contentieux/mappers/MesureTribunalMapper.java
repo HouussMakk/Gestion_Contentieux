@@ -2,6 +2,7 @@ package org.sid.gestion_contentieux.mappers;
 
 import org.sid.gestion_contentieux.dao.Entity.MesureTribunal;
 import org.sid.gestion_contentieux.dto.MesureTribunaldto;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,14 +49,20 @@ public class MesureTribunalMapper {
             return null;
         }
 
-        List<MesureTribunaldto> collect = entities.stream()
-                .map((MesureTribunal mesure) -> entityToDto(mesure))
+        return entities.stream()
+                .map(MesureTribunalMapper::entityToDto)
                 .collect(Collectors.toList());
-        return collect;
     }
 
-                public static MesureTribunaldto entityToDto(MesureTribunal mesure) {
-        return null ;
+    public static MesureTribunaldto entityToDto(MesureTribunal mesure) {
+        MesureTribunaldto mesureTribunaldto = new MesureTribunaldto();
+        if (mesure != null) {
+            mesureTribunaldto.setIdMesure(mesure.getId_Mesure());
+            mesureTribunaldto.setTypeMesure(mesure.gettypeMesure());
+            mesureTribunaldto.setDateMesure(mesure.getDateMesure());
+            //TODO referecne
+        }
+        return mesureTribunaldto;
     }
 
     /**
@@ -78,11 +85,12 @@ public class MesureTribunalMapper {
 
         entity.settypeMesure(dto.getTypeMesure());
         entity.setDateMesure(dto.getDateMesure());
-        entity.setDossierJuridique(dto.getDossierJuridique());
-        entity.setDocumentAssocie(dto.getDocumentAssocie());
+//        entity.setDossierJuridique(dto.getDossierJuridique());
+//        entity.setDocumentAssocie(dto.getDocumentAssocie());
         // Remarque: Les relations (document, dossier) doivent être gérées séparément
         // car elles nécessitent des accès aux repositories
 
         return entity;
     }
+
 }

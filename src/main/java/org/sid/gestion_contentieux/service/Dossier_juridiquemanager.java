@@ -3,6 +3,7 @@ package org.sid.gestion_contentieux.service;
 import org.sid.gestion_contentieux.dao.Entity.Dossier_juridique;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface Dossier_juridiquemanager {
     /**
@@ -13,10 +14,11 @@ public interface Dossier_juridiquemanager {
 
     /**
      * Récupère un dossier juridique par sa référence
+     *
      * @param reference la référence du dossier
      * @return le dossier juridique correspondant
      */
-    Dossier_juridique getDossierByReference(String reference_Dossier);
+    Optional<Dossier_juridique> getDossierByReference(String reference_Dossier);
 
     /**
      * Crée un nouveau dossier juridique

@@ -31,7 +31,7 @@ public class StadeLitigeMapper {
         // Map dossier references if they exist
         if (stadeLitige.getDossiers() != null && !stadeLitige.getDossiers().isEmpty()) {
             List<String> dossierReferences = stadeLitige.getDossiers().stream()
-                    .map(Dossier_juridique::getReference_Dossier)
+                    .map(Dossier_juridique::getReferenceDossier)
                     .collect(Collectors.toList());
             dto.setDossiersReferences(dossierReferences);
         }

@@ -12,9 +12,8 @@ public interface Dossier_juridiqueRepo extends JpaRepository<Dossier_juridique, 
     List<Dossier_juridique> findByNatureLitige(String natureLitige);
     List<Dossier_juridique> findByInstancejudiciaire(String instanceJudiciaire);
 
-    default Optional<Dossier_juridique> findByReference_Dossier(String referenceDossier) {
-            return null;
-    }
+     Optional<Dossier_juridique> findByReferenceDossier(String referenceDossier);
+    //Dossier_juridique getDossierByReference(String referenceDossier);
 
     //Optional<Dossier_juridique> findByReference_Dossier(String reference_Dossier);
 }

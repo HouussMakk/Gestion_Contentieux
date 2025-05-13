@@ -9,4 +9,6 @@ import java.util.Optional;
 @Repository
 public interface DocumentAssocieRepo extends JpaRepository<DocumentAssocie, Long> {
     Optional<DocumentAssocie> findByIdDocumentAssocie(int idDocumentAssocie);
+
+    //DocumentAssocie getDocumentById(int documentAssocieId);
 }

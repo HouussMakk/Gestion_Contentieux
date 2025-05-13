@@ -103,7 +103,7 @@ public class DocumentAssocieService implements DocumentAssocieManager {
     @Override
     public List<DocumentAssocie> getDocumentsByDossierReference(String referenceDossier) {
         // Rechercher le dossier par sa référence
-        Optional<Dossier_juridique> dossierOpt = dossierRepository.findByReference_Dossier(referenceDossier);
+        Optional<Dossier_juridique> dossierOpt = dossierRepository.findByReferenceDossier(referenceDossier);
         if (!dossierOpt.isPresent()) {
             return new ArrayList<>();
         }

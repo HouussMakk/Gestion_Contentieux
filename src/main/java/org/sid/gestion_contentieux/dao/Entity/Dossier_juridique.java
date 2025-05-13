@@ -14,7 +14,7 @@
 
     public class Dossier_juridique {
         @Id
-        public String reference_Dossier ;
+        public String referenceDossier;
         public String qualiteagence ;
         public String natureLitige ;
         public String objetLitige ;
@@ -43,12 +43,12 @@
         private List<MesureTribunal> mesures ;
 
 
-        public String getReference_Dossier() {
-            return reference_Dossier;
+        public String getReferenceDossier() {
+            return referenceDossier;
         }
 
-        public void setReference_Dossier(String reference_Dossier) {
-            this.reference_Dossier = reference_Dossier;
+        public void setReferenceDossier(String reference_Dossier) {
+            this.referenceDossier = reference_Dossier;
         }
 
         public String getQualiteagence() {
