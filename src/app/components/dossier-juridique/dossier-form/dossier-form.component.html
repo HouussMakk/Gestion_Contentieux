@@ -1,0 +1,64 @@
+<div class="ml-64 p-8">
+  <div class="bg-white rounded-lg shadow-lg p-6">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-gray-800">{{isEditMode ? 'Modifier' : 'Nouveau'}} Dossier Juridique</h2>
+    </div>
+
+    <form [formGroup]="dossierForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <div class="grid grid-cols-2 gap-6">
+        <div class="col-span-1">
+          <label class="block text-sm font-medium text-gray-700">Référence</label>
+          <input type="text" formControlName="reference"
+                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">
+          <div *ngIf="dossierForm.get('reference')?.touched && dossierForm.get('reference')?.invalid" 
+               class="text-red-500 text-sm mt-1">
+            La référence est requise
+          </div>
+        </div>
+
+        <div class="col-span-1">
+          <label class="block text-sm font-medium text-gray-700">Titre</label>
+          <input type="text" formControlName="titre"
+                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">
+          <div *ngIf="dossierForm.get('titre')?.touched && dossierForm.get('titre')?.invalid" 
+               class="text-red-500 text-sm mt-1">
+            Le titre est requis
+          </div>
+        </div>
+
+        <div class="col-span-1">
+          <label class="block text-sm font-medium text-gray-700">Date</label>
+          <input type="date" formControlName="date"
+                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">
+        </div>
+
+        <div class="col-span-1">
+          <label class="block text-sm font-medium text-gray-700">Statut</label>
+          <select formControlName="statut"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">
+            <option value="en cours">En cours</option>
+            <option value="terminé">Terminé</option>
+            <option value="urgent">Urgent</option>
+          </select>
+        </div>
+
+        <div class="col-span-2">
+          <label class="block text-sm font-medium text-gray-700">Description</label>
+          <textarea formControlName="description" rows="4"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"></textarea>
+        </div>
+      </div>
+
+      <div class="flex justify-end space-x-4">
+        <button type="button" routerLink="/dossier-juridique"
+                class="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+          Annuler
+        </button>
+        <button type="submit" [disabled]="!dossierForm.valid"
+                class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-sky-500 hover:bg-sky-600 disabled:bg-sky-300">
+          {{isEditMode ? 'Modifier' : 'Créer'}}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
