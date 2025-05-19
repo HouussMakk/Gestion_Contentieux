@@ -34,8 +34,8 @@ public class MesureTribunalService implements MesureTribunalManager{
     }
 
     @Override
-    public MesureTribunal getMesureById(int idMesure) {
-        return mesureRepository.findById(Long.valueOf(idMesure))
+    public MesureTribunal getMesureById(Long idMesure) {
+        return mesureRepository.findById(idMesure)
                 .orElse(null);
     }
 
@@ -60,7 +60,7 @@ public class MesureTribunalService implements MesureTribunalManager{
 
 
     @Override
-    public MesureTribunal updateMesure(int idMesure, MesureTribunal mesureDetails) {
+    public MesureTribunal updateMesure(Long idMesure, MesureTribunal mesureDetails) {
         MesureTribunal mesure = getMesureById(idMesure);
 
         // Mettre à jour les propriétés de la mesure
@@ -73,7 +73,7 @@ public class MesureTribunalService implements MesureTribunalManager{
     }
 
     @Override
-    public boolean deleteMesure(int idMesure) {
+    public boolean deleteMesure(Long idMesure) {
         MesureTribunal mesure = getMesureById(idMesure);
         mesureRepository.delete(mesure);
         return true;

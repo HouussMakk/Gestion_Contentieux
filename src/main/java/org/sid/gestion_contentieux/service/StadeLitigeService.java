@@ -55,7 +55,12 @@ public class StadeLitigeService implements StadeLitigeManager {
     @Override
     public boolean deleteStadeLitige(int idStadeLitige) {
         StadeLitige stadeLitige = getStadeLitigeById(idStadeLitige);
-        stadeLitigeRepository.delete(stadeLitige);
-        return true;
+        try{
+            stadeLitigeRepository.deleteById((long) idStadeLitige);
+            return true;
+        }
+        catch(Exception e){
+                throw new IllegalArgumentException("Cannot Deleete stadeLitei since it's reference");
+        }
     }
 }

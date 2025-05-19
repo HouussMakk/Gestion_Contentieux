@@ -60,6 +60,8 @@ public class MesureTribunalMapper {
             mesureTribunaldto.setIdMesure(mesure.getId_Mesure());
             mesureTribunaldto.setTypeMesure(mesure.gettypeMesure());
             mesureTribunaldto.setDateMesure(mesure.getDateMesure());
+            mesureTribunaldto.setReferenceDossier(mesure.getDossierJuridique().getReferenceDossier());
+            mesureTribunaldto.setDocumentAssocieId(mesure.getDocumentAssocie().getIdDocumentAssocie());
             //TODO referecne
         }
         return mesureTribunaldto;

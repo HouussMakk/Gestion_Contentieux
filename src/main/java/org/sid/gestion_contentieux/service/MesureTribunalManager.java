@@ -19,7 +19,7 @@ public interface MesureTribunalManager {
       * Récupère une mesure tribunal par son ID
       * @return la mesure tribunal correspondante
       */
-     MesureTribunal getMesureById(int id_Mesure);
+     MesureTribunal getMesureById(Long id_Mesure);
 
      /**
       * Crée une nouvelle mesure tribunal
@@ -34,14 +34,14 @@ public interface MesureTribunalManager {
       * @param mesureDetails les nouvelles données de la mesure
       * @return la mesure mise à jour
       */
-     MesureTribunal updateMesure(int id_Mesure, MesureTribunal mesureDetails);
+     MesureTribunal updateMesure(Long id_Mesure, MesureTribunal mesureDetails);
 
      /**
       * Supprime une mesure tribunal
       * @param id_Mesure l'ID de la mesure à supprimer
       * @return true si la suppression a réussi
       */
-     boolean deleteMesure(int id_Mesure);
+     boolean deleteMesure(Long id_Mesure);
 
      /**
       * Recherche des mesures par type de mesure

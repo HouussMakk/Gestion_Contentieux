@@ -1,6 +1,7 @@
 package org.sid.gestion_contentieux.web;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.commons.lang.NullArgumentException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.sid.gestion_contentieux.dao.Entity.DocumentAssocie;
 import org.sid.gestion_contentieux.dao.Entity.Dossier_juridique;
@@ -47,10 +48,10 @@ public class MesureTribunalController {
     /**
      * Récupère une mesure tribunal par son ID
      */
-    @GetMapping("/{id_Mesure}")
+    @GetMapping("/{idMesure}")
     @Tag(name = "get", description = "GET methods of Employee APIs")
-    public ResponseEntity<MesureTribunaldto> getMesureById(@PathVariable int id_Mesure) {
-        MesureTribunal mesure = mesureService.getMesureById(id_Mesure);
+    public ResponseEntity<MesureTribunaldto> getMesureById(@PathVariable Long idMesure) {
+        MesureTribunal mesure = mesureService.getMesureById(idMesure);
         if (mesure == null)
             return new ResponseEntity<>(MesureTribunalMapper.entityToDto(mesure), HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(MesureTribunalMapper.entityToDto(mesure), HttpStatus.OK);
@@ -105,12 +106,36 @@ public class MesureTribunalController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PutMapping("/{idMesure}")
+    public ResponseEntity<MesureTribunaldto> updateMesure(
+            @PathVariable Long idMesure,
+            @RequestBody MesureTribunaldto mesureDto
+    ){
+        try {
+            MesureTribunal existingMesure = mesureService.getMesureById(idMesure);
+            existingMesure.settypeMesure(mesureDto.getTypeMesure());
+            existingMesure.setDateMesure(mesureDto.getDateMesure());
+            DocumentAssocie document = documentService.getDocumentById(mesureDto.getDocumentAssocieId());
+            existingMesure.setDocumentAssocie(document);
+            Optional<Dossier_juridique> dossierJuridique = dossierService.getDossierByReference(mesureDto.getReferenceDossier());
+            if (!dossierJuridique.isPresent())
+                throw new NullArgumentException("DOssier Jurique Not FOund");
 
+            MesureTribunal mesureTribunal = mesureService.updateMesure(idMesure,existingMesure);
+            MesureTribunaldto mesureTribunaldto  = MesureTribunalMapper.entityToDto(mesureTribunal);
+            return new ResponseEntity<>(mesureTribunaldto, HttpStatus.OK);
+        }
+        catch (Exception e) {
+            System.err.println("Erreur lors de la mise à jour du dossier: " + e.getMessage());
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     /**
      * Supprime une mesure tribunal
      */
     @DeleteMapping("/{idMesure}")
-    public ResponseEntity<Void> deleteMesure(@PathVariable int idMesure) {
+    public ResponseEntity<Void> deleteMesure(@PathVariable Long idMesure) {
         boolean deleted = mesureService.deleteMesure(idMesure);
         if (deleted) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
