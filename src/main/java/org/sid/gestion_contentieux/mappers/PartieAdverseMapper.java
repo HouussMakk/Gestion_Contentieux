@@ -20,7 +20,7 @@ public class PartieAdverseMapper {
         }
 
         PartieAdversedto dto = new PartieAdversedto();
-
+        dto.setIdPartieadverse(partieAdverse.getIdPartieAdverse());
         dto.setNom(partieAdverse.getNom());
         dto.setAdresee(partieAdverse.getAdresee());
         dto.setContact(partieAdverse.getContact());
