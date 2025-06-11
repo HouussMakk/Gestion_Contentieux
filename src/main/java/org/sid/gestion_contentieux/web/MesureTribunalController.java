@@ -22,7 +22,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/mesure")
-@CrossOrigin("*")
 public class MesureTribunalController {
     private final MesureTribunalService mesureService;
     private final Dossier_juridiqueService dossierService;
