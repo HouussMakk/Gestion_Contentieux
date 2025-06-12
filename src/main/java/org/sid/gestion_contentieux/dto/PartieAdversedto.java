@@ -7,13 +7,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PartieAdversedto {
 
+    private Long idPartieadverse;
     private String nom;
     private String adresee;
     private String contact;
 
 
     // Getters
-
+    public Long getIdPartieadverse() {
+        return idPartieadverse;
+    }
 
     public String getNom() {
         return nom;
@@ -29,6 +32,9 @@ public class PartieAdversedto {
 
 
     // Setters
+    public void setIdPartieadverse(Long idPartieadverse) {
+        this.idPartieadverse = idPartieadverse;
+    }
 
     public void setNom(String nom) {
         this.nom = nom;
@@ -42,4 +48,4 @@ public class PartieAdversedto {
         this.contact = contact;
     }
 
- }
+}
