@@ -15,7 +15,7 @@ public interface Dossier_juridiquemanager {
     /**
      * Récupère un dossier juridique par sa référence
      *
-     * @param reference la référence du dossier
+     *  reference la référence du dossier
      * @return le dossier juridique correspondant
      */
     Optional<Dossier_juridique> getDossierByReference(String reference_Dossier);
@@ -29,7 +29,7 @@ public interface Dossier_juridiquemanager {
 
     /**
      * Met à jour un dossier juridique existant
-     * @param reference la référence du dossier à mettre à jour
+     *   la référence du dossier à mettre à jour
      * @param dossier les nouvelles données du dossier
      * @return le dossier mis à jour
      */
@@ -37,7 +37,7 @@ public interface Dossier_juridiquemanager {
 
     /**
      * Supprime un dossier juridique
-     * @param reference la référence du dossier à supprimer
+     * reference la référence du dossier à supprimer
      * @return true si la suppression a réussi
      */
     boolean deleteDossier(String reference_Dossier);

@@ -2,6 +2,7 @@ package org.sid.gestion_contentieux.web;
 
 import org.sid.gestion_contentieux.dao.Entity.*;
 import org.sid.gestion_contentieux.dto.Dossier_juridiquedto;
+import org.sid.gestion_contentieux.dto.read.DossierJuridiquedListingDto;
 import org.sid.gestion_contentieux.mappers.Dossier_juridiqueMapper;
 import org.sid.gestion_contentieux.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +41,10 @@ public class Dossier_juridiqueController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Dossier_juridiquedto>> getAllDossiers() {
+    public ResponseEntity<List<DossierJuridiquedListingDto>> getAllDossiers() {
         List<Dossier_juridique> dossiers = dossierService.getAllDossiers();
-        List<Dossier_juridiquedto> dossierDtos = dossiers.stream()
-                .map(Dossier_juridiqueMapper::entityToDto)
+        List<DossierJuridiquedListingDto> dossierDtos = dossiers.stream()
+                .map(Dossier_juridiqueMapper::entityToListingDto)
                 .collect(Collectors.toList());
         return new ResponseEntity<>(dossierDtos, HttpStatus.OK);
     }
