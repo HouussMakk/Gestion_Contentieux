@@ -24,6 +24,7 @@ public class User implements UserDetails {
     @Column(unique = true, length = 100, nullable = false)
     private String email;
 
+
     @Column(nullable = false)
     private String password;
 
@@ -35,6 +36,14 @@ public class User implements UserDetails {
     @Column(name = "updated_at")
     private Date updatedAt;
 
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+    public boolean getEnabled() {
+        return enabled;
+    }
+    @Column(name = "enabled")
+    private boolean enabled;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
